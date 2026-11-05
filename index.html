@@ -58,7 +58,7 @@ header .lede{font-size:15px;color:rgba(255,255,255,.82);max-width:760px;margin:0
 header .wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:70px;display:block}
 
 /* ---------- 规则条 ---------- */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-66px;margin-bottom:28px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 22px}
 .stat{background:linear-gradient(180deg,#fff,#fbfaf6);border:1px solid var(--line);border-radius:14px;
   padding:15px 18px;box-shadow:var(--shadow)}
 .stat .lab{font-size:11px;letter-spacing:.16em;color:var(--muted);margin-bottom:4px}
@@ -126,7 +126,7 @@ input[type=number]:focus,select:focus{outline:none;border-color:var(--copper);bo
 .result-box::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;
   background:linear-gradient(90deg,transparent,var(--copper2),transparent)}
 .result-box .lab{font-size:11.5px;letter-spacing:.22em;color:rgba(255,255,255,.62);position:relative}
-.result-box .big{font-family:Georgia,"Times New Roman",serif;font-size:64px;font-weight:700;line-height:1.05;
+.result-box .big{font-family:Georgia,"Times New Roman",serif;font-size:52px;font-weight:700;line-height:1.05;
   font-variant-numeric:tabular-nums;position:relative;letter-spacing:.01em}
 .result-box .sub{font-size:12.5px;color:rgba(255,255,255,.78);margin-top:6px;position:relative}
 .mini{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
@@ -246,7 +246,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:28px 0 46px;l
 @media (max-width:900px){
   .calc-grid,.rev-flex,.steps{grid-template-columns:1fr}
   .schemes.two{grid-template-columns:1fr}
-  .stats{grid-template-columns:1fr 1fr;margin-top:-52px}
+  .stats{grid-template-columns:1fr 1fr;margin:0 0 18px}
   header{padding:38px 0 84px}
   header h1{font-size:24px}
   header .ghost{font-size:220px;top:-30px}
@@ -354,7 +354,7 @@ h2{padding-bottom:13px;
    text-shadow:0 8px 40px rgba(0,0,0,.38))}
 .big-label,.result-label{letter-spacing:.22em;font-size:10.5px;color:rgba(255,255,255,.62))}
 /* 统计条 */
-.stats{gap:14px)}
+.stats{gap:14px}
 .stat{padding:18px 20px;border-radius:16px;border-color:#efe5d1)}
 .stat b{font-size:34px;letter-spacing:.01em)}
 /* 控件 */
@@ -661,7 +661,8 @@ header .ghost{animation:ghostPulse 11s ease-in-out infinite}
 </style>
 
 <style id="fxcss">
-#fxbg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+#fxbg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9;
+  transform:translateZ(0);backface-visibility:hidden}
 .planet2{position:fixed;left:-34px;top:24vh;width:190px;height:190px;z-index:0;
   pointer-events:none;opacity:.7;perspective:600px}
 .p2glow{position:absolute;inset:-30%;border-radius:50%;
@@ -755,10 +756,62 @@ header .ghost{animation:ghostPulse 11s ease-in-out infinite}
   50%{box-shadow:0 0 0 6px rgba(55,194,207,.16)}}
 @media (max-width:600px){.audbar{padding:10px 13px;gap:10px}.aud-name{font-size:12.5px}}
 </style>
+
+<style id="mobileperf">
+@media (max-width:900px){
+  #bgfx{transform:translateZ(0);backface-visibility:hidden}
+  .gridbg{animation:none}
+  .orb{filter:none;opacity:.62}
+  header .aurora{animation:none;filter:blur(24px)}
+  .palm-bg{animation:none}
+  .planet{opacity:.4}
+  .planet2{display:none}
+  .fml{animation:none;opacity:.6}
+  #fxbg{opacity:.55}
+}
+@media (max-width:600px){
+  header .aurora{filter:blur(16px);opacity:.4}
+  .orb{opacity:.5}
+  #fxbg{opacity:.45}
+}
+</style>
+
+<style id="staticbg">
+#bgfx,#fxbg{display:none!important}
+.orb,.planet,.planet2,header .aurora{display:none!important}
+.gridbg,.palm-bg,.fml{animation:none!important}
+body{background-image:
+  radial-gradient(1200px 600px at 12% -8%, rgba(55,194,207,.10), transparent 62%),
+  radial-gradient(900px 520px at 92% 8%, rgba(201,162,39,.09), transparent 64%),
+  linear-gradient(180deg,#f7f4ec 0%,#f3efe4 38%,#eef2ee 100%)!important;
+}
+@media (max-width:1100px){
+  .result-box{padding:12px 16px!important;border-radius:12px;display:flex;flex-wrap:wrap;
+    align-items:baseline;gap:2px 10px;text-align:left}
+  .result-box .lab{flex:0 0 auto;font-size:11.5px}
+  .result-box .big{order:0;flex:1 1 auto;text-align:right;font-size:34px!important;line-height:1.1}
+  .result-box .sub{flex:1 0 100%;font-size:11px!important;margin-top:0;text-align:right}
+  .result-box .wk{flex:1 0 100%;text-align:right;margin-top:6px}
+  .card{box-shadow:0 10px 26px -24px rgba(20,60,70,.5)!important}
+  header .palm{filter:none!important}
+  #fsBody tr{content-visibility:auto;contain-intrinsic-size:0 30px}
+}
+@media (max-width:600px){
+  .result-box .big{font-size:28px!important}
+  .result-box .lab{font-size:11px}
+}
+</style>
+
+<style id="foldcss">
+.foldbtn{display:block;margin:-6px 0 14px auto;cursor:pointer;
+  border:1px solid rgba(55,194,207,.45);background:rgba(55,194,207,.10);color:#0b6f79;
+  border-radius:999px;padding:5px 14px;font-size:12px;letter-spacing:.04em;transition:.16s}
+.foldbtn:hover{background:rgba(55,194,207,.2)}
+.foldbody.collapsed{display:none}
+@media (max-width:600px){.foldbtn{margin:0 0 12px auto;padding:4px 12px;font-size:11.5px}}
+</style>
 </head>
 <body>
-<canvas id="bgfx" aria-hidden="true"></canvas>
-<canvas id="fxbg" aria-hidden="true"></canvas>
 
 <div class="planet" aria-hidden="true">
   <div class="pglow"></div>
@@ -834,13 +887,7 @@ header .ghost{animation:ghostPulse 11s ease-in-out infinite}
 </header>
 
 <div class="wrap">
-  <div class="stats">
-    <div class="stat"><div class="lab">综合分满分</div><div class="num">900</div><div class="sub">以 500 为中心，±4σ</div></div>
-    <div class="stat"><div class="lab">单科满分</div><div class="num">300</div><div class="sub">以 180 为中心，60 起</div></div>
-    <div class="stat"><div class="lab">主科权重</div><div class="num">1.5<em>倍</em></div><div class="sub">语数英，选考记 1</div></div>
-    <div class="stat"><div class="lab">计分科目</div><div class="num">6<em>科</em></div><div class="sub">3 统考 + 3 选考</div></div>
   </div>
-</div>
 
 <main class="wrap">
 
@@ -898,57 +945,7 @@ header .ghost{animation:ghostPulse 11s ease-in-out infinite}
 </section>
 
 <section class="card">
-  <h2><i class="h2g">Φ</i>一、计算方式：按位次换算</h2>
-  <p>海南不公布原始分，只公布标准分。原因很简单：不同科目难度不同，原始分不能直接相加；而“你在全省排第几”可以。</p>
-  <div class="steps">
-    <div class="step"><span class="num">1</span><h3>定位</h3>
-      <p>把你的原始分放到全省该科考生里排序，算出“不超过你的人数占比”，叫百分等级 R。</p>
-      <code>R = 不超过你的人数 ÷ 该科总人数 × 100%</code></div>
-    <div class="step"><span class="num">2</span><h3>正态化</h3>
-      <p>把 R 送进标准正态分布的反函数，得到正态分 z；再拉成 180 为中心、30 为一档的分数。</p>
-      <code>T = 180 + 30 × Φ⁻¹(R/100)</code></div>
-    <div class="step"><span class="num">3</span><h3>合成</h3>
-      <p>语数英各乘 1.5、选考各乘 1，得到合成总分 t；再对 t 重复一次“定位 + 正态化”。</p>
-      <code>t = 1.5(语+数+英) + 选1+选2+选3</code></div>
-  </div>
-  <div class="tw"><table class="method">
-    <thead><tr><th>步骤</th><th>计算方式</th><th>示例（下节那位考生）</th></tr></thead>
-    <tbody>
-      <tr><td class="l">① 百分等级</td><td class="l">R = 不超过你的人数 ÷ 该科人数 × 100%</td><td class="l">语文 82 分，全省约 68.0%</td></tr>
-      <tr><td class="l">② 单科标准分</td><td class="l">T = 180 + 30 × Φ⁻¹(R/100)</td><td class="l">Φ⁻¹(0.680)=0.47 → 194</td></tr>
-      <tr><td class="l">③ 合成总分</td><td class="l">t = 1.5(语+数+英) + 选1+选2+选3</td><td class="l">1.5×603 + 658 = 1562.5</td></tr>
-      <tr><td class="l">④ 综合分</td><td class="l">T = 500 + 100 × Φ⁻¹(R<sub>t</sub>/100)</td><td class="l">84.1% → z=1.00 → 600</td></tr>
-    </tbody>
-  </table></div>
-  <div class="callout"><b>最容易误解的一点：</b>标准分不是“原始分 × 系数”。同样的 55 分，如果卷子难、全省排位靠前，标准分可能比简单卷子的 80 分还高。决定标准分的只有两件事：<b>你在全省的位置</b>，以及<b>该科的人数</b>。</div>
-  <div class=diffbox>
-    <div class=dt>同样的 60 分，不同科目换出不同标准分</div>
-    <div class=drow>
-      <span><b>物理</b><i>194</i></span>
-      <span><b>化学</b><i>210</i></span>
-      <span><b>生物</b><i>218</i></span>
-      <span><b>地理</b><i>209</i></span>
-    </div>
-    <div class=dn>同样的原始分，不同科目换出的标准分不一样——科目难度差在这里就被折算掉了。所以“选哪三科”会影响综合分，但影响是通过这六个标准分传进去的。</div>
-  </div>
-</section>
-
-<section class="card">
-  <h2><i class="h2g">∫</i>二、走一遍：600 分是怎么算出来的</h2>
-  <p class="muted">以一位考生为例（选科 化生地），六科原始分与换算结果如下。</p>
-  <div class="tw"><table>
-    <thead><tr><th>科目</th><th>原始分</th><th>标准分</th><th>全省百分位</th></tr></thead>
-    <tbody id="exampleBody"></tbody>
-  </table></div>
-  <p style="margin-top:14px">合成总分：<code>t = 1.5×(194 + 187 + 222) + 210 + 239 + 209 = 1562.5</code></p>
-  <p>把 t 放回全省综合分分布里查表：1562.5 对应的百分位约 <b>84.1%</b>，即</p>
-  <div class="formula">综合分 = 500 + 100 × Φ⁻¹(0.841) ≈ <b>600</b></div>
-  <p class="note">数学卷面只有 55 分（满分 150），但按全省位次换算后标准分 187、百分位约 59%，并不拖后腿——这就是标准分“按位次换算”的意义。六科原始分直接相加只有 447 分，换算后综合分是 600。</p>
-  <p class="note">下面的计算器默认填的就是这位考生的分数，打开即可看到同样的结果。</p>
-</section>
-
-<section class="card">
-  <h2><i class="h2g">Σ</i>三、正算：输入原始分</h2>
+  <h2><i class="h2g">Σ</i>一、正算：输入原始分</h2>
   <div class="calc-grid">
     <div>
       <div class="field"><label>语文</label><input type="range" id="r语文" min="0" max="150" step="1" value="82"><input type="number" id="n语文" min="0" max="150" step="1" value="82"></div>
@@ -1000,7 +997,7 @@ header .ghost{animation:ghostPulse 11s ease-in-out infinite}
 </section>
 
 <section class="card">
-  <h2><i class="h2g">√</i>四、反算：输入标准分</h2>
+  <h2><i class="h2g">√</i>二、反算：输入标准分</h2>
   <div class="calc-grid">
     <div>
       <div class="field"><label>语文</label><input type="range" id="sr语文" min="60" max="300" step="1" value="194"><input type="number" id="sn语文" min="60" max="300" step="1" value="194"></div>
@@ -1032,8 +1029,17 @@ header .ghost{animation:ghostPulse 11s ease-in-out infinite}
   </div>
 </section>
 
+<div class="stats">
+    <div class="stat"><div class="lab">综合分满分</div><div class="num">900</div><div class="sub">以 500 为中心，±4σ</div></div>
+    <div class="stat"><div class="lab">单科满分</div><div class="num">300</div><div class="sub">以 180 为中心，60 起</div></div>
+    <div class="stat"><div class="lab">主科权重</div><div class="num">1.5<em>倍</em></div><div class="sub">语数英，选考记 1</div></div>
+    <div class="stat"><div class="lab">计分科目</div><div class="num">6<em>科</em></div><div class="sub">3 统考 + 3 选考</div></div>
+  </div>
+
 <section class="card">
-  <h2><i class="h2g">π</i>五、综合分 → 各科怎么配</h2>
+  <h2><i class="h2g">π</i>三、综合分 → 各科怎么配</h2>
+  <button class="foldbtn" id="fold5" type="button" aria-expanded="true">收起</button>
+  <div class="foldbody" id="foldBody5">
   <div class="revcard">
     <p class="muted">输入目标综合分，给出若干种分科方案；每格上面是标准分、下面是约合原始分，右下角为该方案的原始总分。</p>
     <div class="rev-ctrl">
@@ -1063,6 +1069,57 @@ header .ghost{animation:ghostPulse 11s ease-in-out infinite}
     </div>
     
   </div>
+</div>
+</section>
+
+<section class="card">
+  <h2><i class="h2g">Φ</i>四、计算方式：按位次换算</h2>
+  <p>海南不公布原始分，只公布标准分。原因很简单：不同科目难度不同，原始分不能直接相加；而“你在全省排第几”可以。</p>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><h3>定位</h3>
+      <p>把你的原始分放到全省该科考生里排序，算出“不超过你的人数占比”，叫百分等级 R。</p>
+      <code>R = 不超过你的人数 ÷ 该科总人数 × 100%</code></div>
+    <div class="step"><span class="num">2</span><h3>正态化</h3>
+      <p>把 R 送进标准正态分布的反函数，得到正态分 z；再拉成 180 为中心、30 为一档的分数。</p>
+      <code>T = 180 + 30 × Φ⁻¹(R/100)</code></div>
+    <div class="step"><span class="num">3</span><h3>合成</h3>
+      <p>语数英各乘 1.5、选考各乘 1，得到合成总分 t；再对 t 重复一次“定位 + 正态化”。</p>
+      <code>t = 1.5(语+数+英) + 选1+选2+选3</code></div>
+  </div>
+  <div class="tw"><table class="method">
+    <thead><tr><th>步骤</th><th>计算方式</th><th>示例（下节那位考生）</th></tr></thead>
+    <tbody>
+      <tr><td class="l">① 百分等级</td><td class="l">R = 不超过你的人数 ÷ 该科人数 × 100%</td><td class="l">语文 82 分，全省约 68.0%</td></tr>
+      <tr><td class="l">② 单科标准分</td><td class="l">T = 180 + 30 × Φ⁻¹(R/100)</td><td class="l">Φ⁻¹(0.680)=0.47 → 194</td></tr>
+      <tr><td class="l">③ 合成总分</td><td class="l">t = 1.5(语+数+英) + 选1+选2+选3</td><td class="l">1.5×603 + 658 = 1562.5</td></tr>
+      <tr><td class="l">④ 综合分</td><td class="l">T = 500 + 100 × Φ⁻¹(R<sub>t</sub>/100)</td><td class="l">84.1% → z=1.00 → 600</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><b>最容易误解的一点：</b>标准分不是“原始分 × 系数”。同样的 55 分，如果卷子难、全省排位靠前，标准分可能比简单卷子的 80 分还高。决定标准分的只有两件事：<b>你在全省的位置</b>，以及<b>该科的人数</b>。</div>
+  <div class=diffbox>
+    <div class=dt>同样的 60 分，不同科目换出不同标准分</div>
+    <div class=drow>
+      <span><b>物理</b><i>194</i></span>
+      <span><b>化学</b><i>210</i></span>
+      <span><b>生物</b><i>218</i></span>
+      <span><b>地理</b><i>209</i></span>
+    </div>
+    <div class=dn>同样的原始分，不同科目换出的标准分不一样——科目难度差在这里就被折算掉了。所以“选哪三科”会影响综合分，但影响是通过这六个标准分传进去的。</div>
+  </div>
+</section>
+
+<section class="card">
+  <h2><i class="h2g">∫</i>五、走一遍：600 分是怎么算出来的</h2>
+  <p class="muted">以一位考生为例（选科 化生地），六科原始分与换算结果如下。</p>
+  <div class="tw"><table>
+    <thead><tr><th>科目</th><th>原始分</th><th>标准分</th><th>全省百分位</th></tr></thead>
+    <tbody id="exampleBody"></tbody>
+  </table></div>
+  <p style="margin-top:14px">合成总分：<code>t = 1.5×(194 + 187 + 222) + 210 + 239 + 209 = 1562.5</code></p>
+  <p>把 t 放回全省综合分分布里查表：1562.5 对应的百分位约 <b>84.1%</b>，即</p>
+  <div class="formula">综合分 = 500 + 100 × Φ⁻¹(0.841) ≈ <b>600</b></div>
+  <p class="note">数学卷面只有 55 分（满分 150），但按全省位次换算后标准分 187、百分位约 59%，并不拖后腿——这就是标准分“按位次换算”的意义。六科原始分直接相加只有 447 分，换算后综合分是 600。</p>
+  <p class="note">下面的计算器默认填的就是这位考生的分数，打开即可看到同样的结果。</p>
 </section>
 
 <section class="card">
@@ -2105,80 +2162,7 @@ const DATA = {"subj":{"语文":{"x":[1.0,2.0,3.0,4.5,5.0,6.0,6.5,7.5,8.5,9.5,10.
 })();
 </script>
 
-<script>
-(function(){
-  if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const cv=document.getElementById("bgfx"); if(!cv||!cv.getContext) return;
-  const ctx=cv.getContext("2d"); if(!ctx) return;
-  const raf=(window.requestAnimationFrame||function(){}).bind(window);
-  let W=0,H=0,DPR=1;
-  function resize(){
-    DPR=Math.min(window.devicePixelRatio||1,1.5);
-    W=window.innerWidth; H=window.innerHeight;
-    cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
-    cv.style.width=W+"px"; cv.style.height=H+"px";
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-  }
-  window.addEventListener("resize",resize); resize();
-  const blobs=[
-    {cx:.16,cy:.10,r:.60,c:"55,194,207",a:.11,s:.00005,p:0},
-    {cx:.84,cy:.18,r:.48,c:"201,162,39",a:.09,s:.00008,p:2.1},
-    {cx:.55,cy:.95,r:.62,c:"31,111,92",a:.08,s:.00004,p:4.2}
-  ];
-  const N = window.innerWidth<760 ? 22 : 40;
-  const pts=[];
-  for(let i=0;i<N;i++) pts.push({x:Math.random(),y:Math.random(),
-    vx:(Math.random()-.5)*.00007,vy:(Math.random()-.5)*.00007});
-  let last=0;
-  function frame(now){
-    raf(frame);
-    if(now-last<33) return;
-    last=now;
-    ctx.clearRect(0,0,W,H);
-    for(const b of blobs){
-      const x=(b.cx+Math.sin(now*b.s+b.p)*.12)*W;
-      const y=(b.cy+Math.cos(now*b.s*1.4+b.p)*.10)*H;
-      const R=b.r*Math.min(W,H);
-      const g=ctx.createRadialGradient(x,y,0,x,y,R);
-      g.addColorStop(0,"rgba("+b.c+","+b.a+")");
-      g.addColorStop(1,"rgba("+b.c+",0)");
-      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,R,0,6.2832); ctx.fill();
-    }
-    for(const p of pts){
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>1) p.vx*=-1;
-      if(p.y<0||p.y>1) p.vy*=-1;
-    }
-    ctx.strokeStyle="rgba(55,194,207,.18)"; ctx.lineWidth=1;
-    for(let i=0;i<pts.length;i++){
-      for(let j=i+1;j<pts.length;j++){
-        const dx=(pts[i].x-pts[j].x)*W, dy=(pts[i].y-pts[j].y)*H;
-        const d2=dx*dx+dy*dy;
-        if(d2<150*150){
-          ctx.globalAlpha=(1-Math.sqrt(d2)/150)*.45;
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x*W,pts[i].y*H);
-          ctx.lineTo(pts[j].x*W,pts[j].y*H);
-          ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha=1;
-    ctx.fillStyle="rgba(31,111,92,.30)";
-    for(const p of pts){ ctx.beginPath(); ctx.arc(p.x*W,p.y*H,1.5,0,6.2832); ctx.fill(); }
-    for(let k=0;k<2;k++){
-      ctx.beginPath();
-      for(let x=0;x<=W;x+=16){
-        const y=H-64-k*24+Math.sin(x*0.006+now*0.0004+k*1.7)*9;
-        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-      }
-      ctx.strokeStyle = k? "rgba(201,162,39,.14)" : "rgba(55,194,207,.18)";
-      ctx.lineWidth=1.2; ctx.stroke();
-    }
-  }
-  raf(frame);
-})();
-</script>
+
 
 <script>
 (function(){
@@ -2324,72 +2308,7 @@ const DATA = {"subj":{"语文":{"x":[1.0,2.0,3.0,4.5,5.0,6.0,6.5,7.5,8.5,9.5,10.
 </script>
 
 
-<script>
-(function(){
-  if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const cv=document.getElementById("fxbg");
-  if(!cv||!cv.getContext) return;
-  const ctx=cv.getContext("2d"); if(!ctx) return;
-  const raf=(window.requestAnimationFrame||function(){}).bind(window);
-  let W=0,H=0,DPR=1;
-  function resize(){
-    DPR=Math.min(window.devicePixelRatio||1,1.5);
-    W=window.innerWidth; H=window.innerHeight;
-    cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
-    cv.style.width=W+"px"; cv.style.height=H+"px";
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-  }
-  window.addEventListener("resize",resize); resize();
 
-  function square(x,n){
-    let sum=0;
-    for(let k=1;k<=n;k+=2) sum+=Math.sin(k*x)/k;
-    return sum*4/Math.PI;
-  }
-  function drawWave(cy, amp, phase, color, fn, k){
-    ctx.beginPath();
-    for(let x=-10;x<=W+10;x+=6){
-      const u=(x/W)*Math.PI*2*k + phase;
-      const y=cy-amp*fn(u);
-      if(x<=-10+6) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-    }
-    ctx.strokeStyle=color; ctx.lineWidth=1.5; ctx.shadowColor=color; ctx.shadowBlur=8; ctx.stroke(); ctx.shadowBlur=0;
-    // 采样点
-    ctx.fillStyle=color.replace(/[\d.]+\)$/,"0.75)");
-    for(let x=0;x<=W;x+=Math.max(42,W/26)){
-      const u=(x/W)*Math.PI*2*k + phase;
-      ctx.beginPath(); ctx.arc(x, cy-amp*fn(u), 2.1, 0, 6.2832); ctx.fill();
-    }
-  }
-
-  let last=0;
-  function frame(now){
-    raf(frame);
-    if(now-last<50) return;
-    last=now;
-    const t=now/1000;
-    ctx.clearRect(0,0,W,H);
-
-    // 1) 行波
-    drawWave(H*0.30, Math.min(46,H*0.05), t*0.7,
-      "rgba(55,194,207,0.30)", u=>Math.sin(u), 1);
-
-    // 2) 方波的傅里叶合成（阶数随时间变化）
-    const n=1+2*(1+Math.floor((Math.sin(t*0.18)+1)*3));   // 1,3,5,7
-    drawWave(H*0.56, Math.min(56,H*0.06), t*0.45,
-      "rgba(31,111,92,0.26)", u=>square(u,n)*0.72, 1);
-
-    // 3) 高斯脉冲横向漂移
-    const c=0.5+0.42*Math.sin(t*0.11);
-    drawWave(H*0.80, Math.min(64,H*0.07), 0,
-      "rgba(201,162,39,0.24)", u=>{
-        const x=u/(Math.PI*2);   // 0..1
-        return Math.exp(-Math.pow((x-c)/0.09,2));
-      }, 1);
-  }
-  raf(frame);
-})();
-</script>
 
 <script>
 (function(){
@@ -2425,6 +2344,18 @@ const DATA = {"subj":{"语文":{"x":[1.0,2.0,3.0,4.5,5.0,6.0,6.5,7.5,8.5,9.5,10.
   a.addEventListener("pause",()=>ui(false));
   a.addEventListener("ended",()=>{ ui(false); a.currentTime=0; });
   ui(false);
+})();
+</script>
+
+<script>
+(function(){
+  const btn=document.getElementById("fold5"), body=document.getElementById("foldBody5");
+  if(!btn||!body) return;
+  btn.addEventListener("click",()=>{
+    const hidden=body.classList.toggle("collapsed");
+    btn.textContent=hidden?"展开":"收起";
+    btn.setAttribute("aria-expanded", String(!hidden));
+  });
 })();
 </script>
 </body>
